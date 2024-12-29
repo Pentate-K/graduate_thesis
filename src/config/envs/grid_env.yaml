@@ -1,0 +1,38 @@
+# # 環境設定
+# env: "grid_env"      # カスタム環境名
+
+# env_args:
+  
+#   key: "grid_env"                       # サンプルグリッドマップ (0: 通路, 1: 障害物, 3: チェックポイント)
+#   num_agents: 2                 # エージェントの数
+#   episode_limit: 100            # エピソードの最大ステップ数
+
+# # MAPPOアルゴリズム設定
+# name: "mappo"
+# learner: "mappo_learner"
+# agent: "rnn_agent"
+# runner: "parallel"
+# batch_size_run: 4
+# batch_size: 32
+# buffer_size: 5000
+# t_max: 1000000                  # 総学習ステップ数
+
+# # 学習率と最適化設定
+# lr: 5e-4
+# gamma: 0.99                     # 割引率
+# gae_lambda: 0.95                # GAEのlambda値
+
+# # ネットワーク設定
+# rnn_hidden_dim: 64              # RNNの隠れ層の次元
+# obs_agent_id: True              # 観測にエージェントIDを含めるか
+# obs_last_action: True           # 観測に最後のアクションを含めるか
+
+# # 報酬のスケーリング
+# reward_scaling: 0.1
+
+# # チェックポイントとログ設定
+# save_model: True
+# checkpoint_path: "results/models/multi_agent_grid/"
+# evaluate: True
+# eval_interval: 10000
+# log_interval: 1000

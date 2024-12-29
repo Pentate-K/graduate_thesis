@@ -18,7 +18,7 @@ from utils.general_reward_support import test_alg_config_supports_reward
 from utils.logging import Logger
 from utils.timehelper import time_left, time_str
 
-
+episode_list = [0,]
 def run(_run, _config, _log):
     # check args sanity
     _config = args_sanity_check(_config, _log)
@@ -64,7 +64,7 @@ def run(_run, _config, _log):
     logger.setup_sacred(_run)
 
     # Run and train
-    run_sequential(args=args, logger=logger)
+    episode_list = run_sequential(args=args, logger=logger)
 
     # Finish logging
     logger.finish()
@@ -197,6 +197,7 @@ def run_sequential(args, logger):
 
     while runner.t_env <= args.t_max:
         # Run for a whole episode at a time
+        
         episode_batch = runner.run(test_mode=False)
         buffer.insert_episode_batch(episode_batch)
 
@@ -257,6 +258,9 @@ def run_sequential(args, logger):
                     )
 
         episode += args.batch_size_run
+        # # print(episode)
+        # global episode_list
+        episode_list.append(episode)
 
         if (runner.t_env - last_log_T) >= args.log_interval:
             logger.log_stat("episode", episode, runner.t_env)
@@ -265,6 +269,7 @@ def run_sequential(args, logger):
 
     runner.close_env()
     logger.console_logger.info("Finished Training")
+    return episode_list
 
 
 def args_sanity_check(config, _log):

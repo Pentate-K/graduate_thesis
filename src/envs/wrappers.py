@@ -9,9 +9,9 @@ class FlattenObservation(Wrapper):
         super(FlattenObservation, self).__init__(env)
 
         ma_spaces = []
-
-        for sa_obs in env.observation_space:
+        for sa_obs in env.observation_space: # 各エージェントの観測空間について処理している？
             flatdim = spaces.flatdim(sa_obs)
+            # print(flatdim)
             ma_spaces += [
                 spaces.Box(
                     low=-float("inf"),

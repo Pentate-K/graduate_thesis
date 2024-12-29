@@ -18,6 +18,16 @@ import torch as th
 
 from utils.logging import get_logger
 from run import run
+from gymnasium import register
+
+
+# register(
+#     id="grid1_obs",                         # Environment ID.
+#     entry_point="myenv.environment:MyEnvironment",  # The entry point for the environment class
+#     kwargs={
+#                             # Arguments that go to MyEnvironment's __init__ function.
+#         },
+#     )
 
 SETTINGS["CAPTURE_MODE"] = (
     "fd"  # set to "no" if you want to see stdout/stderr in console
@@ -108,8 +118,10 @@ if __name__ == "__main__":
     config_dict = recursive_dict_update(config_dict, alg_config)
 
     try:
+        # print(config_dict)
         map_name = config_dict["env_args"]["map_name"]
     except:
+        # print(config_dict)
         map_name = config_dict["env_args"]["key"]
 
     # now add all the config to sacred

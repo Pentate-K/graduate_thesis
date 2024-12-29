@@ -43,11 +43,11 @@ class GymmaWrapper(MultiAgentEnv):
         if pretrained_wrapper:
             self._env = getattr(pretrained, pretrained_wrapper)(self._env)
 
-        self.n_agents = self._env.unwrapped.n_agents
+        self.n_agents = self._env.unwrapped.num_agents
         self.episode_limit = time_limit
         self._obs = None
         self._info = None
-
+        # print(type(self._env.action_space))
         self.longest_action_space = max(self._env.action_space, key=lambda x: x.n)
         self.longest_observation_space = max(
             self._env.observation_space, key=lambda x: x.shape

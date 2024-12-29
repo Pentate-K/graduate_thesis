@@ -67,6 +67,7 @@ class EpisodeRunner:
 
     def run(self, test_mode=False):
         self.reset()
+        # self.env.update_episode(self.t_env // self.episode_limit)
 
         terminated = False
         if self.args.common_reward:
@@ -150,6 +151,8 @@ class EpisodeRunner:
                     "epsilon", self.mac.action_selector.epsilon, self.t_env
                 )
             self.log_train_stats_t = self.t_env
+        
+        
 
         return self.batch
 
